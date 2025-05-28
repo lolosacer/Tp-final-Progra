@@ -101,37 +101,48 @@ header a:hover {
     text-shadow: 0 0 8px #000;
 }
 
+.productos-lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+}
+
 .producto {
-    width: 220px;
-    margin: 16px;
-    display: inline-block;
-    vertical-align: top;
-    text-align: center;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px #0001;
-    padding: 12px;
+    flex: 0 1 calc(33.33% - 32px); /* 3 productos por fila, considerando el gap */
+    max-width: 320px;
+    min-width: 220px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 12px 8px 16px 8px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .producto img {
     width: 100%;
-    border-radius: 6px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 0;
+    margin-bottom: 10px;
 }
 
-.producto-nombre {
+.prodNombre {
     color: #111;
     font-weight: bold;
     margin: 8px 0 4px 0;
     font-size: 1.1rem;
 }
 
-.producto-tipo {
+.prodTipo {
     color: #444;
     margin: 0 0 4px 0;
     font-size: 0.95rem;
 }
 
-.producto-precio {
+.prodPrecio {
     color: #000;
     font-weight: bold;
     font-size: 1.1rem;
