@@ -297,3 +297,17 @@ const products = [
   }
 ];
 
+products.forEach(product => {
+  const section = document.getElementById(product.category);
+  if (section) {
+    section.innerHTML += `
+      <div class="producto">
+        <img src="${product.image}" alt="${product.name}">
+        <h3 class="producto-nombre">${product.name}</h3>
+        <p class="producto-tipo">${product.description}</p>
+        <p class="producto-precio">$${product.price}</p>
+      </div>
+    `;
+  }
+});
+

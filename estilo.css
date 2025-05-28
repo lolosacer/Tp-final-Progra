@@ -1,17 +1,17 @@
 
 body {
-  margin: 0;
-  font-family: Tahoma;
+    margin: 0;
+    font-family: Tahoma;
 }
 
 header h1 {
-  margin: 0;
+    margin: 0;
 }
 
 nav a {
-  color: black;
-  margin: 0 1rem;
-  text-decoration: none;
+    color: black;
+    margin: 0 1rem;
+    text-decoration: none;
 }
 
 header {
@@ -99,4 +99,41 @@ header a:hover {
     font-size: 2rem;
     font-weight: bold;
     text-shadow: 0 0 8px #000;
+}
+
+.producto {
+    width: 220px;
+    margin: 16px;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0001;
+    padding: 12px;
+}
+
+.producto img {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.producto-nombre {
+    color: #111;
+    font-weight: bold;
+    margin: 8px 0 4px 0;
+    font-size: 1.1rem;
+}
+
+.producto-tipo {
+    color: #444;
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+}
+
+.producto-precio {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
 }
