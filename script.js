@@ -297,26 +297,29 @@ const products = [
   }
 ];
 
-products.forEach(product => {
-  const section = document.getElementById(product.categoria);
-  if (section) {
-    const lista  = section.querySelector('.productos-lista');
-    lista.innerHTML += `
-      <div class="producto">
-        <img src="${product.imagen}" alt="${product.nombre}">
-        <h3 class="prodNombre">${product.nombre}</h3>
-        <p class="prodTipo">${product.descrip}</p>
-        <p class="prodPrecio">$${product.precio}</p>
-        <button  id="btnAgregar" class="btn btn-success w-100 mt-2">Agregar al carrito</button>
-      </div>
-    `;
-  }
-});
+for (let i = 0; i < products.length; i++) {
+    let product = products[i];
+    let section = document.getElementById(product.categoria);
+    if (section) {
+        let lista = section.querySelector('.productos-lista');
+        lista.innerHTML += `
+            <div class="producto">
+                <img src="${product.imagen}" alt="${product.nombre}">
+                <h3 class="prodNombre">${product.nombre}</h3>
+                <p class="prodTipo">${product.descrip}</p>
+                <p class="prodPrecio">$${product.precio}</p>
+                <button class="btn btn-success w-100 mt-2 btn-agregar" data-id="${product.id}">Agregar al carrito</button>
+            </div>
+        `;
+    }
+}
 
 let carrito = [];
 
 function agregarAlCarrito(idProducto) {
-    const item = carrito.find(prod => prod.id === idProducto);
+    let item = carrito.find(function(prod) {
+        return prod.id === idProducto;
+    });
     if (item) {
         item.cantidad += 1;
     } else {
@@ -325,3 +328,4 @@ function agregarAlCarrito(idProducto) {
     return carrito;
 }
 
+let carro = document.getElementById("");
