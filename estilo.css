@@ -148,3 +148,13 @@ header a:hover {
     font-size: 1.1rem;
     margin: 0;
 }
+
+.btn-success{
+    font-size: 1,5rem;
+    padding: 6px 0;
+    border-radius: 10px;
+    border-color: grey;
+    background-color: grey;
+    color: white;
+    letter-spacing: 1px;
+}

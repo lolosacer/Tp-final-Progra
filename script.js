@@ -22,7 +22,7 @@ const products = [
     nombre: "Raqueta Head Radical",
     precio: 159.99,
     categoria: "tenis",
-    imagen: "fotos/raquetahead.jpg",
+    imagen: "fotos/h.jpg",
     descrip: "Ligera y versátil para todo tipo de juego."
   },
   {
@@ -128,7 +128,7 @@ const products = [
     nombre: "Botines Under Armour Magnetico",
     precio: 109.99,
     categoria: "futbol",
-    imagen: "fotos/magnetico.jpeg",
+    imagen: "fotos/magn.webp",
     descrip: "Comodidad y tracción superior."
   },
   {
@@ -210,7 +210,7 @@ const products = [
     nombre: "Zapatillas New Balance Fresh Foam",
     precio: 149.99,
     categoria: "running",
-    imagen: "fotos/zapasnewbalance.jpeg",
+    imagen: "fotos/new.jpeg",
     descrip: "Amortiguación suave y soporte."
   },
 
@@ -268,7 +268,7 @@ const products = [
     nombre: "Remera Golden State Warriors",
     precio: 59.99,
     categoria: "basket",
-    imagen: "fotos/warriors.jpg",
+    imagen: "fotos/warr.webp",
     descrip: "Remera oficial Golden State Warriors."
   },
   {
@@ -307,9 +307,21 @@ products.forEach(product => {
         <h3 class="prodNombre">${product.nombre}</h3>
         <p class="prodTipo">${product.descrip}</p>
         <p class="prodPrecio">$${product.precio}</p>
+        <button  id="btnAgregar" class="btn btn-success w-100 mt-2">Agregar al carrito</button>
       </div>
     `;
   }
 });
 
+let carrito = [];
+
+function agregarAlCarrito(idProducto) {
+    const item = carrito.find(prod => prod.id === idProducto);
+    if (item) {
+        item.cantidad += 1;
+    } else {
+        carrito.push({ id: idProducto, cantidad: 1 });
+    }
+    return carrito;
+}
 
