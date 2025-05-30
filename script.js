@@ -297,22 +297,23 @@ let products = [
   }
 ];
 
-for (let i = 0; i < products.length; i++) {
-    let product = products[i];
+products.forEach(function(product) {
     let section = document.getElementById(product.categoria);
     if (section) {
         let lista = section.querySelector('.productos-lista');
         lista.innerHTML += `
-            <div class="producto">
-                <img src="${product.imagen}" alt="${product.nombre}">
-                <h3 class="prodNombre">${product.nombre}</h3>
-                <p class="prodTipo">${product.descrip}</p>
-                <p class="prodPrecio">$${product.precio}</p>
-                <button class="btn btn-success w-100 mt-2 btn-agregar" data-id="${product.id}">Agregar al carrito</button>
+            <div class="producto-item">
+                <div class="producto">
+                    <img src="${product.imagen}" alt="${product.nombre}">
+                    <h3 class="prodNombre">${product.nombre}</h3>
+                    <p class="prodTipo">${product.descrip}</p>
+                    <p class="prodPrecio">$${product.precio}</p>
+                    <button class="btn-agregar" data-id="${product.id}">Agregar al carrito</button>
+                </div>
             </div>
         `;
     }
-}
+});
 
 let carrito = [];
 

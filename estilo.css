@@ -56,13 +56,27 @@ header a:hover {
     color: #007bff;
 }
 
-
-
-.fotos {
-    margin: 0;
-    padding: 0;
+.carousel-inner {
+    width: 100%;
 }
 
+.productos-lista {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.producto-item {
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+
+.carousel-inner img {
+    width: 100%;
+    height: 500px;      /* Cambiá este valor para hacerlas más largas o más cortas */
+    object-fit: cover;
+    display: block;
+}
 .galeria-fila {
     display: flex;
     width: 100vw;
@@ -78,6 +92,7 @@ header a:hover {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    max-width: 100vw;
 }
 
 .galeria-item img {
@@ -103,31 +118,29 @@ header a:hover {
 .productos-lista {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.producto {
-    flex: 0 1 calc(33.33% - 32px); /* 3 productos por fila, considerando el gap */
-    max-width: 320px;
-    min-width: 220px;
+.producto-item {
+    width: 50%;
     box-sizing: border-box;
-    margin: 0;
-    padding: 12px 8px 16px 8px;
-    min-height: 420px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 24px 12px;
+}
+
+
+.producto {
+    text-align: center;
 }
 
 .producto img {
     width: 100%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-    border-radius: 0;
-    margin-bottom: 10px;
+    max-width: 350px;
+    height: 320px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 12px auto;
 }
-
 .prodNombre {
     color: #111;
     font-weight: bold;
@@ -156,4 +169,20 @@ header a:hover {
     background-color: grey;
     color: white;
     letter-spacing: 1px;
+}
+
+.btn-agregar {
+    background: #888;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin-top: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px #aaa;
+    transition: background 0.2s;
+}
+.btn-agregar:hover {
+    background: #444;
 }
