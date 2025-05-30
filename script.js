@@ -1,5 +1,5 @@
 
-const products = [
+let products = [
   // TENIS
   {
     id: 1,
@@ -316,16 +316,28 @@ for (let i = 0; i < products.length; i++) {
 
 let carrito = [];
 
-function agregarAlCarrito(idProducto) {
-    let item = carrito.find(function(prod) {
-        return prod.id === idProducto;
-    });
-    if (item) {
-        item.cantidad += 1;
-    } else {
-        carrito.push({ id: idProducto, cantidad: 1 });
-    }
-    return carrito;
+function actualizarCarrito(){
+  let total = localStorage.getItem("carrito") || 0;
+  let contador = document.getElementById("carritoContador");
+  if (contador){
+    contador.textContent = total
+  }
 }
 
-let carro = document.getElementById("");
+function agregarAlCarrito() {
+    let total = Number(localStorage.getItem('carrito')) || 0;
+    total += 1;
+    localStorage.setItem('carrito', total);
+    actualizarCarrito();
+}
+
+function quitarDelCarrito() {
+    let total = Number(localStorage.getItem('carrito')) || 0;
+    if (total > 0) {
+      total -= 1;
+      localStorage.setItem('carrito', total);
+    }
+    actualizarCarrito();
+}
+
+
