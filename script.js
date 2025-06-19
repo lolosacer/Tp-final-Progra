@@ -30,20 +30,20 @@ const products = [
   },
   {
     id: 4,
-    nombre: "Zapatillas Nike Court Lite",
-    precio: 89.99,
+    nombre: "Pack 3 Pelotas Dunlop",
+    precio: 14.99,
     categoria: "tenis",
-    imagen: "fotos/nikecourt.jpg",
-    descrip: "Comodidad y estilo en la pista.",
+    imagen: "fotos/pack3pelotas.webp",
+    descrip: "Pack de tres pelotas de alta durabilidad.",
     fecha: "2024-05-04"
   },
   {
     id: 5,
-    nombre: "Zapatillas Adidas SoleCourt",
-    precio: 94.99,
+    nombre: "Grip Antideslizante",
+    precio: 7.99,
     categoria: "tenis",
-    imagen: "fotos/adidassolecourt.jpg",
-    descrip: "Durabilidad y agarre excepcionales.",
+    imagen: "fotos/grip.webp",
+    descrip: "Mejor agarre y control.",
     fecha: "2024-05-05"
   },
   // FÚTBOL
@@ -52,7 +52,7 @@ const products = [
     nombre: "Botines Adidas Predator",
     precio: 129.99,
     categoria: "futbol",
-    imagen: "fotos/botinespredator.jpg",
+    imagen: "fotos/predator.webp",
     descrip: "Control de balón perfecto.",
     fecha: "2024-05-06"
   },
@@ -61,44 +61,53 @@ const products = [
     nombre: "Botines Nike Mercurial",
     precio: 139.99,
     categoria: "futbol",
-    imagen: "fotos/botinesmercurial.jpg",
+    imagen: "fotos/mercurial.jpg",
     descrip: "Rapidez y precisión.",
     fecha: "2024-05-07"
   },
   {
     id: 8,
-    nombre: "Balón Nike Ordem",
+    nombre: "Pelota Premier League",
     precio: 39.99,
     categoria: "futbol",
-    imagen: "fotos/balonordem.jpg",
+    imagen: "fotos/pelotapremier.jpg",
     descrip: "Vuelo estable y resistente.",
     fecha: "2024-05-08"
   },
   {
     id: 9,
-    nombre: "Balón Adidas Conext21",
+    nombre: "Pelota Liga Argentina",
     precio: 44.99,
     categoria: "futbol",
-    imagen: "fotos/balonconext21.jpg",
+    imagen: "fotos/pelotaarg.webp",
     descrip: "Calidad profesional.",
     fecha: "2024-05-09"
   },
   {
     id: 10,
-    nombre: "Espinilleras Puma",
+    nombre: "Botines Puma",
     precio: 24.99,
     categoria: "futbol",
-    imagen: "fotos/espinilleraspuma.jpg",
+    imagen: "fotos/future.webp",
     descrip: "Protección y comodidad.",
+    fecha: "2024-05-10"
+  },
+  {
+    id: 14,
+    nombre: "Botines Under Armour",
+    precio: 24.99,
+    categoria: "futbol",
+    imagen: "fotos/magnetico.jpeg",
+    descrip: "Calidad y precision.",
     fecha: "2024-05-10"
   },
   // BASKET
   {
     id: 11,
-    nombre: "Zapatillas Nike LeBron",
+    nombre: "Zapatillas Nike Air Zoom",
     precio: 149.99,
     categoria: "basket",
-    imagen: "fotos/nikelbron.jpg",
+    imagen: "fotos/nikeairzoom.jpg",
     descrip: "Potencia para tu juego.",
     fecha: "2024-05-11"
   },
@@ -112,24 +121,6 @@ const products = [
     fecha: "2024-05-12"
   },
   {
-    id: 13,
-    nombre: "Pelota Spalding TF-1000",
-    precio: 34.99,
-    categoria: "basket",
-    imagen: "fotos/spaldingtf1000.jpg",
-    descrip: "Pelota oficial de torneos.",
-    fecha: "2024-05-13"
-  },
-  {
-    id: 14,
-    nombre: "Pelota Molten GG7X",
-    precio: 29.99,
-    categoria: "basket",
-    imagen: "fotos/moltengg7x.jpg",
-    descrip: "Pelota FIBA aprobada.",
-    fecha: "2024-05-14"
-  },
-  {
     id: 15,
     nombre: "Canasto de Entrenamiento",
     precio: 59.99,
@@ -137,6 +128,15 @@ const products = [
     imagen: "fotos/canastoentrenamiento.jpg",
     descrip: "Accesorio para práctica en casa.",
     fecha: "2024-05-15"
+  },
+  {
+    id: 13,
+    nombre: "Camiseta Pacers",
+    precio: 24.99,
+    categoria: "futbol",
+    imagen: "fotos/future.webp",
+    descrip: "Protección y comodidad.",
+    fecha: "2024-05-10"
   },
   // RUNNING
   {
@@ -199,7 +199,7 @@ const products = [
     nombre: "Gorra Visera",
     precio: 19.99,
     categoria: "running",
-    imagen: "fotos/gorra.jpg",
+    imagen: "fotos/gorra.jpg",  
     descrip: "Protección solar.",
     fecha: "2024-05-22"
   },
@@ -275,7 +275,6 @@ const products = [
     descrip: "Reponer electrolitos.",
     fecha: "2024-05-30"
   },
-  // EXTRAS
   {
     id: 31,
     nombre: "Cinta Kinesio",
@@ -347,13 +346,18 @@ function updateCartCount() {
 }
 
 // AÑADIR Y QUITAR
+
 function addToCart(id) {
   const cart = getCart();
+  const sidebar = document.getElementById('sidebarCart');
   cart[id] = (cart[id] || 0) + 1;
   saveCart(cart);
   updateCartCount();
   renderCartItems();
+  updateCartTotal();
+  sidebar.classList.add('open');
 }
+
 function removeFromCart(id) {
   const cart = getCart();
   if (!cart[id]) return;
@@ -362,6 +366,7 @@ function removeFromCart(id) {
   saveCart(cart);
   updateCartCount();
   renderCartItems();
+  updateCartTotal();
 }
 
 // RENDER CARRITO
@@ -380,10 +385,12 @@ function renderCartItems() {
     `;
     container.appendChild(div);
   }
-  // attach remove handlers
   container.querySelectorAll('.remove-btn').forEach(btn => {
     btn.addEventListener('click', () => removeFromCart(btn.dataset.id));
   });
+
+  // ← Aquí se actualiza el total
+  updateCartTotal();
 }
 
 // SIDEBAR TOGGLE
@@ -399,12 +406,14 @@ document.getElementById('buyButton').addEventListener('click', () => {
   localStorage.removeItem('cart');
   updateCartCount();
   renderCartItems();
+  updateCartTotal();
 });
 
 // CARGAR PRODUCTOS EN PÁGINAS
 document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
   renderCartItems();
+  updateCartTotal();
 
   // Si estamos en productos.html
   document.querySelectorAll('.productos-lista').forEach(list => {
@@ -464,436 +473,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+function updateCartTotal() {
+  const cart = getCart();
+  let sum = 0;
+  for (let id in cart) {
+    const prod = products.find(p => p.id == id);
+    if (prod) sum += prod.precio * cart[id];
+  }
+  // Asegura que muestre $0.00 si está vacío
+  document.getElementById('cartTotal').textContent = 'Total: $' + sum.toFixed(2);
+}
 
 
-// let products = [
-//   // TENIS
-//   {
-//     id: 1,
-//     nombre: "Raqueta Wilson Pro Staff",
-//     precio: 199.99,
-//     categoria: "tenis",
-//     imagen: "fotos/raquetawilsonprostaf.jpg",
-//     descrip: "Raqueta profesional de alto rendimiento.",
-//     fecha: "2024-05-01"
-//   },
-//   {
-//     id: 2,
-//     nombre: "Raqueta Babolat Pure Drive",
-//     precio: 179.99,
-//     categoria: "tenis",
-//     imagen: "fotos/raquetababolat.webp",
-//     descrip: "Potencia y control para jugadores avanzados.",
-//     fecha: "2024-05-02"
-//   },
-//   {
-//     id: 3,
-//     nombre: "Raqueta Head Radical",
-//     precio: 159.99,
-//     categoria: "tenis",
-//     imagen: "fotos/h.jpg",
-//     descrip: "Ligera y versátil para todo tipo de juego.",
-//     fecha: "2024-05-03"
-//   },
-//   {
-//     id: 4,
-//     nombre: "Pack 3 Pelotas Dunlop",
-//     precio: 14.99,
-//     categoria: "tenis",
-//     imagen: "fotos/pack3pelotas.webp",
-//     descrip: "Pack de tres pelotas de alta durabilidad.",
-//     fecha: "2024-05-04"
-//   },
-//   {
-//     id: 5,
-//     nombre: "Grip Antideslizante",
-//     precio: 7.99,
-//     categoria: "tenis",
-//     imagen: "fotos/grip.webp",
-//     descrip: "Mejor agarre y comodidad.",
-//     fecha: "2024-05-05"
-//   },
-//   {
-//     id: 6,
-//     nombre: "Muñequeras Nike",
-//     precio: 9.99,
-//     categoria: "tenis",
-//     imagen: "fotos/munequeras.webp",
-//     descrip: "Absorbe el sudor y brinda soporte.",
-//     fecha: "2024-05-06"
-//   },
-
-//   // FÚTBOL
-//   {
-//     id: 7,
-//     nombre: "Camiseta Boca Juniors",
-//     precio: 89.99,
-//     categoria: "futbol",
-//     imagen: "fotos/boca.png",
-//     descrip: "Camiseta oficial temporada 2024.",
-//     fecha: "2024-05-07"
-//   },
-//   {
-//     id: 8,
-//     nombre: "Camiseta Real Madrid",
-//     precio: 99.99,
-//     categoria: "futbol",
-//     imagen: "fotos/realmadrid.webp",
-//     descrip: "Camiseta oficial blanca con detalles dorados.",
-//     fecha: "2024-05-08"
-//   },
-//   {
-//     id: 9,
-//     nombre: "Camiseta Barcelona",
-//     precio: 99.99,
-//     categoria: "futbol",
-//     imagen: "fotos/barcelona.jpg",
-//     descrip: "Camiseta oficial azulgrana.",
-//     fecha: "2024-05-09"
-//   },
-//   {
-//     id: 10,
-//     nombre: "Camiseta Liverpool",
-//     precio: 99.99,
-//     categoria: "futbol",
-//     imagen: "fotos/liverpool.jpg",
-//     descrip: "Camiseta oficial roja.",
-//     fecha: "2024-05-10"
-//   },
-//   {
-//     id: 11,
-//     nombre: "Camiseta PSG",
-//     precio: 99.99,
-//     categoria: "futbol",
-//     imagen: "fotos/psg.jpg",
-//     descrip: "Camiseta oficial azul con detalles rojos.",
-//     fecha: "2024-05-11"
-//   },
-//   {
-//     id: 12,
-//     nombre: "Camiseta Bayern Munich",
-//     precio: 99.99,
-//     categoria: "futbol",
-//     imagen: "fotos/bayern.jpg",
-//     descrip: "Camiseta oficial roja.",
-//     fecha: "2024-05-12"
-//   },
-//   {
-//     id: 13,
-//     nombre: "Botines Nike Mercurial",
-//     precio: 129.99,
-//     categoria: "futbol",
-//     imagen: "fotos/mercurial.jpg",
-//     descrip: "Botines ligeros para velocidad.",
-//     fecha: "2024-05-13"
-//   },
-//   {
-//     id: 14,
-//     nombre: "Botines Adidas Predator",
-//     precio: 129.99,
-//     categoria: "futbol",
-//     imagen: "fotos/predator.webp",
-//     descrip: "Control y precisión en cada pase.",
-//     fecha: "2024-05-14"
-//   },
-//   {
-//     id: 15,
-//     nombre: "Botines Puma Future",
-//     precio: 119.99,
-//     categoria: "futbol",
-//     imagen: "fotos/future.webp",
-//     descrip: "Diseño innovador y ajuste perfecto.",
-//     fecha: "2024-05-15"
-//   },
-//   {
-//     id: 16,
-//     nombre: "Botines Under Armour Magnetico",
-//     precio: 109.99,
-//     categoria: "futbol",
-//     imagen: "fotos/magn.webp",
-//     descrip: "Comodidad y tracción superior.",
-//     fecha: "2024-05-16"
-//   },
-//   {
-//     id: 17,
-//     nombre: "Pelota Liga Argentina",
-//     precio: 49.99,
-//     categoria: "futbol",
-//     imagen: "fotos/pelotaarg.webp",
-//     descrip: "Pelota oficial de la Liga Profesional.",
-//     fecha: "2024-05-17"
-//   },
-//   {
-//     id: 18,
-//     nombre: "Pelota Premier League",
-//     precio: 59.99,
-//     categoria: "futbol",
-//     imagen: "fotos/pelotapremier.jpg",
-//     descrip: "Pelota oficial de la Premier.",
-//     fecha: "2024-05-18"
-//   },
-
-//   // RUNNING
-//   {
-//     id: 19,
-//     nombre: "Zapatillas Adidas Ultraboost",
-//     precio: 179.99,
-//     categoria: "running",
-//     imagen: "fotos/ultraboost.jpg",
-//     descrip: "Amortiguación y retorno de energía.",
-//     fecha: "2024-05-19"
-//   },
-//   {
-//     id: 20,
-//     nombre: "Zapatillas Adidas Adizero",
-//     precio: 159.99,
-//     categoria: "running",
-//     imagen: "fotos/adizero.jpg",
-//     descrip: "Ligereza para máxima velocidad.",
-//     fecha: "2024-05-20"
-//   },
-//   {
-//     id: 21,
-//     nombre: "Zapatillas Nike Pegasus",
-//     precio: 169.99,
-//     categoria: "running",
-//     imagen: "fotos/pegasus.jpg",
-//     descrip: "Versatilidad y comodidad.",
-//     fecha: "2024-05-21"
-//   },
-//   {
-//     id: 22,
-//     nombre: "Zapatillas Nike ZoomX",
-//     precio: 189.99,
-//     categoria: "running",
-//     imagen: "fotos/zoomx.jpg",
-//     descrip: "Máxima respuesta y ligereza.",
-//     fecha: "2024-05-22"
-//   },
-//   {
-//     id: 23,
-//     nombre: "Zapatillas Asics Gel-Kayano",
-//     precio: 159.99,
-//     categoria: "running",
-//     imagen: "fotos/asicsgel.webp",
-//     descrip: "Soporte y estabilidad premium.",
-//     fecha: "2024-05-23"
-//   },
-//   {
-//     id: 24,
-//     nombre: "Zapatillas Reebok Floatride",
-//     precio: 139.99,
-//     categoria: "running",
-//     imagen: "fotos/reebok.webp",
-//     descrip: "Ligereza y amortiguación.",
-//     fecha: "2024-05-24"
-//   },
-//   {
-//     id: 25,
-//     nombre: "Zapatillas Puma Velocity Nitro",
-//     precio: 129.99,
-//     categoria: "running",
-//     imagen: "fotos/pumazapas.jpg",
-//     descrip: "Comodidad y velocidad.",
-//     fecha: "2024-05-25"
-//   },
-//   {
-//     id: 26,
-//     nombre: "Zapatillas New Balance Fresh Foam",
-//     precio: 149.99,
-//     categoria: "running",
-//     imagen: "fotos/new.jpeg",
-//     descrip: "Amortiguación suave y soporte.",
-//     fecha: "2024-05-26"
-//   },
-
-//   // BASKET
-//   {
-//     id: 27,
-//     nombre: "Remera Celtics",
-//     precio: 59.99,
-//     categoria: "basket",
-//     imagen: "fotos/celtics.jpg",
-//     descrip: "Remera oficial Boston Celtics.",
-//     fecha: "2024-05-27"
-//   },
-//   {
-//     id: 28,
-//     nombre: "Remera Lakers",
-//     precio: 59.99,
-//     categoria: "basket",
-//     imagen: "fotos/lakers.jpg",
-//     descrip: "Remera oficial LA Lakers.",
-//     fecha: "2024-05-28"
-//   },
-//   {
-//     id: 29,
-//     nombre: "Remera Timberwolves",
-//     precio: 59.99,
-//     categoria: "basket",
-//     imagen: "fotos/wolves.jpg",
-//     descrip: "Remera oficial Timberwolves.",
-//     fecha: "2024-05-29"
-//   },
-//   {
-//     id: 30,
-//     nombre: "Remera Chicago Bulls",
-//     precio: 59.99,
-//     categoria: "basket",
-//     imagen: "fotos/bulls.jpg",
-//     descrip: "Remera oficial Chicago Bulls.",
-//     fecha: "2024-05-30"
-//   },
-//   {
-//     id: 31,
-//     nombre: "Remera Brooklyn Nets",
-//     precio: 59.99,
-//     categoria: "basket",
-//     imagen: "fotos/nets.jpg",
-//     descrip: "Remera oficial Brooklyn Nets.",
-//     fecha: "2024-05-31"
-//   },
-//   {
-//     id: 32,
-//     nombre: "Remera Indiana Pacers",
-//     precio: 59.99,
-//     categoria: "basket",
-//     imagen: "fotos/pacers.jpg",
-//     descrip: "Remera oficial Indiana Pacers.",
-//     fecha: "2024-06-01"
-//   },
-//   {
-//     id: 33,
-//     nombre: "Remera Golden State Warriors",
-//     precio: 59.99,
-//     categoria: "basket",
-//     imagen: "fotos/warr.webp",
-//     descrip: "Remera oficial Golden State Warriors.",
-//     fecha: "2024-06-02"
-//   },
-//   {
-//     id: 34,
-//     nombre: "Zapatillas Nike Air Zoom BB",
-//     precio: 139.99,
-//     categoria: "basket",
-//     imagen: "fotos/nikeairzoom.jpg",
-//     descrip: "Zapatillas de alto rendimiento.",
-//     fecha: "2024-06-03"
-//   },
-//   {
-//     id: 35,
-//     nombre: "Zapatillas Adidas Harden Vol. 5",
-//     precio: 139.99,
-//     categoria: "basket",
-//     imagen: "fotos/adidashardem.jpg",
-//     descrip: "Zapatillas signature de James Harden.",
-//     fecha: "2024-06-04"
-//   },
-//   {
-//     id: 36,
-//     nombre: "Pelota Spalding NBA",
-//     precio: 49.99,
-//     categoria: "basket",
-//     imagen: "fotos/pelotabasket.jpg",
-//     descrip: "Pelota oficial de la NBA.",
-//     fecha: "2024-06-05"
-//   }
-// ];
-
-
-
-// products.forEach(function(product) {
-//     let section = document.getElementById(product.categoria);
-//     if (section) {
-//         let lista = section.querySelector('.productos-lista');
-//         lista.innerHTML += `
-//             <div class="producto-item">
-//                 <div class="producto">
-//                     <img src="${product.imagen}" alt="${product.nombre}">
-//                     <h3 class="prodNombre">${product.nombre}</h3>
-//                     <pfecha: "2024-05-"  class="prodTipo">${product.
-//                descrip       
-//                     }</p>
-//                     <p class="prodPrecio">$${product.precio}</p>
-//                     <button class="btn-agregar" data-id="${product.id}">Agregar al carrito</button>
-//                 </div>
-//             </div>
-//         `;
-//     }
-// });
-
-// let carrito = [];
-
-// function actualizarCarrito(){
-//   let total = localStorage.getItem("carrito") || 0;
-//   let contador = document.getElementById("carritoContador");
-//   if (contador){
-//     contador.textContent = total
-//   }
-// }
-
-// function agregarAlCarrito() {
-//     let total = Number(localStorage.getItem('carrito')) || 0;
-//     total += 1;
-//     localStorage.setItem('carrito', total);
-//     actualizarCarrito();
-// }
-
-// function quitarDelCarrito() {
-//     let total = Number(localStorage.getItem('carrito')) || 0;
-//     if (total > 0) {
-//       total -= 1;
-//       localStorage.setItem('carrito', total);
-//     }
-//     actualizarCarrito();
-// }
-
-
-// function fechaAEntero(fechaStr) {
-//     let partes = fechaStr.split("-");
-//     return parseInt(partes[0] + partes[1] + partes[2], 10);
-// }
-
-// let productosOrdenados = [];
-// for (let i = 0; i < products.length; i++) {
-//     productosOrdenados.push(products[i]);
-// }
-
-// for (let i = 0; i < productosOrdenados.length - 1; i++) {
-//     for (let j = i + 1; j < productosOrdenados.length; j++) {
-//         if (fechaAEntero(productosOrdenados[j].fecha) > fechaAEntero(productosOrdenados[i].fecha)) {
-//             let temp = productosOrdenados[i];
-//             productosOrdenados[i] = productosOrdenados[j];
-//             productosOrdenados[j] = temp;
-//         }
-//     }
-// }
-
-// let ultimos10 = [];
-// for (let i = 0; i < 12 && i < productosOrdenados.length; i++) {
-//     ultimos10.push(productosOrdenados[i]);
-// }
-
-// let itemsPorSlide = 4; // Cambia este valor si querés más/menos productos por slide
-// let carouselInner = document.getElementById("carousel-inner-ultimos");
-// carouselInner.innerHTML = "";
-
-// for (let i = 0; i < ultimos10.length; i += itemsPorSlide) {
-//     let activeClass = (i === 0) ? "active" : "";
-//     let slideHTML = '<div class="carousel-item ' + activeClass + '">';
-//     slideHTML += '<div class="d-flex justify-content-center gap-4">';
-//     for (let j = i; j < i + itemsPorSlide && j < ultimos10.length; j++) {
-//         let product = ultimos10[j];
-//         slideHTML +=
-//             '<div class="producto-item" style="width: 18rem;">' +
-//                 '<div class="producto">' +
-//                     '<img src="' + product.imagen + '" alt="' + product.nombre + '" class="w-100" style="height: 180px; object-fit: contain;">' +
-//                     '<h3 class="prodNombre" style="font-size:1.1rem;">' + product.nombre + '</h3>' +
-//                     '<p class="prodTipo">' + product.descrip + '</p>' +
-//                     '<p class="prodPrecio">$' + product.precio + '</p>' +
-//                 '</div>' +
-//             '</div>';
-//     }
-//     slideHTML += '</div></div>';
-//     carouselInner.innerHTML += slideHTML;
-// }
