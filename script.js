@@ -6,9 +6,9 @@ const products = [
     nombre: "Raqueta Wilson Pro Staff",
     precio: 199.99,
     categoria: "tenis",
-    imagen: "fotos/raquetawilsonprostaf.jpg",
+    imagen: "fotos/raquetawilson.jpg",
     descrip: "Raqueta profesional de alto rendimiento.",
-    fecha: "2024-05-01"
+    fecha: "2024-05-14"
   },
   {
     id: 2,
@@ -17,364 +17,397 @@ const products = [
     categoria: "tenis",
     imagen: "fotos/raquetababolat.webp",
     descrip: "Potencia y control para jugadores avanzados.",
-    fecha: "2024-05-02"
+    fecha: "2024-06-23"
   },
   {
     id: 3,
     nombre: "Raqueta Head Radical",
     precio: 159.99,
     categoria: "tenis",
-    imagen: "fotos/h.jpg",
+    imagen: "fotos/raquetahead.jpg",
     descrip: "Ligera y versátil para todo tipo de juego.",
-    fecha: "2024-05-03"
+    fecha: "2024-05-09"
   },
   {
     id: 4,
+    nombre: "Raqueta RS",
+    precio: 149.99,
+    categoria: "tenis",
+    imagen: "fotos/rs.webp",
+    descrip: "Diseño innovador con gran potencia.",
+    fecha: "2024-06-02"
+  },
+  {
+    id: 5,
     nombre: "Pack 3 Pelotas Dunlop",
     precio: 14.99,
     categoria: "tenis",
     imagen: "fotos/pack3pelotas.webp",
     descrip: "Pack de tres pelotas de alta durabilidad.",
-    fecha: "2024-05-04"
+    fecha: "2024-05-26"
   },
   {
-    id: 5,
+    id: 6,
     nombre: "Grip Antideslizante",
     precio: 7.99,
     categoria: "tenis",
     imagen: "fotos/grip.webp",
-    descrip: "Mejor agarre y control.",
-    fecha: "2024-05-05"
+    descrip: "Mejor agarre y comodidad.",
+    fecha: "2024-06-15"
   },
+  {
+    id: 7,
+    nombre: "Muñequeras Nike",
+    precio: 9.99,
+    categoria: "tenis",
+    imagen: "fotos/munequeras.webp",
+    descrip: "Absorbe el sudor y brinda soporte.",
+    fecha: "2024-05-18"
+  },
+
   // FÚTBOL
   {
-    id: 6,
+    id: 8,
+    nombre: "Camiseta Boca Juniors",
+    precio: 89.99,
+    categoria: "futbol",
+    imagen: "fotos/boca.png",
+    descrip: "Camiseta oficial temporada 2024.",
+    fecha: "2024-06-10"
+  },
+  {
+    id: 9,
+    nombre: "Camiseta Real Madrid",
+    precio: 99.99,
+    categoria: "futbol",
+    imagen: "fotos/realmadrid.webp",
+    descrip: "Camiseta oficial blanca con detalles dorados.",
+    fecha: "2024-05-05"
+  },
+  {
+    id: 10,
+    nombre: "Camiseta Barcelona",
+    precio: 99.99,
+    categoria: "futbol",
+    imagen: "fotos/barcelona.jpg",
+    descrip: "Camiseta oficial azulgrana.",
+    fecha: "2024-06-14"
+  },
+  {
+    id: 11,
+    nombre: "Camiseta Liverpool",
+    precio: 99.99,
+    categoria: "futbol",
+    imagen: "fotos/liverpool.jpg",
+    descrip: "Camiseta oficial roja.",
+    fecha: "2024-05-21"
+  },
+  {
+    id: 12,
+    nombre: "Camiseta PSG",
+    precio: 99.99,
+    categoria: "futbol",
+    imagen: "fotos/psg.jpg",
+    descrip: "Camiseta oficial azul con detalles rojos.",
+    fecha: "2024-06-06"
+  },
+  {
+    id: 13,
+    nombre: "Camiseta Bayern Munich",
+    precio: 99.99,
+    categoria: "futbol",
+    imagen: "fotos/bayern.jpg",
+    descrip: "Camiseta oficial roja.",
+    fecha: "2024-05-02"
+  },
+  {
+    id: 14,
+    nombre: "Botines Nike Mercurial",
+    precio: 129.99,
+    categoria: "futbol",
+    imagen: "fotos/mercurial.jpg",
+    descrip: "Botines ligeros para velocidad.",
+    fecha: "2024-06-19"
+  },
+  {
+    id: 15,
     nombre: "Botines Adidas Predator",
     precio: 129.99,
     categoria: "futbol",
     imagen: "fotos/predator.webp",
-    descrip: "Control de balón perfecto.",
-    fecha: "2024-05-06"
+    descrip: "Control y precisión en cada pase.",
+    fecha: "2024-05-28"
   },
   {
-    id: 7,
-    nombre: "Botines Nike Mercurial",
-    precio: 139.99,
-    categoria: "futbol",
-    imagen: "fotos/mercurial.jpg",
-    descrip: "Rapidez y precisión.",
-    fecha: "2024-05-07"
-  },
-  {
-    id: 8,
-    nombre: "Pelota Premier League",
-    precio: 39.99,
-    categoria: "futbol",
-    imagen: "fotos/pelotapremier.jpg",
-    descrip: "Vuelo estable y resistente.",
-    fecha: "2024-05-08"
-  },
-  {
-    id: 9,
-    nombre: "Pelota Liga Argentina",
-    precio: 44.99,
-    categoria: "futbol",
-    imagen: "fotos/pelotaarg.webp",
-    descrip: "Calidad profesional.",
-    fecha: "2024-05-09"
-  },
-  {
-    id: 10,
-    nombre: "Botines Puma",
-    precio: 24.99,
+    id: 16,
+    nombre: "Botines Puma Future",
+    precio: 119.99,
     categoria: "futbol",
     imagen: "fotos/future.webp",
-    descrip: "Protección y comodidad.",
-    fecha: "2024-05-10"
+    descrip: "Diseño innovador y ajuste perfecto.",
+    fecha: "2024-06-04"
   },
   {
-    id: 14,
-    nombre: "Botines Under Armour",
-    precio: 24.99,
+    id: 17,
+    nombre: "Botines Under Armour Magnetico",
+    precio: 109.99,
     categoria: "futbol",
-    imagen: "fotos/magnetico.jpeg",
-    descrip: "Calidad y precision.",
-    fecha: "2024-05-10"
+    imagen: "fotos/magn.webp",
+    descrip: "Comodidad y tracción superior.",
+    fecha: "2024-05-22"
   },
-  // BASKET
   {
-    id: 11,
-    nombre: "Zapatillas Nike Air Zoom",
-    precio: 149.99,
-    categoria: "basket",
-    imagen: "fotos/nikeairzoom.jpg",
-    descrip: "Potencia para tu juego.",
+    id: 18,
+    nombre: "Pelota Liga Argentina",
+    precio: 49.99,
+    categoria: "futbol",
+    imagen: "fotos/pelotaarg.webp",
+    descrip: "Pelota oficial de la Liga Profesional.",
     fecha: "2024-05-11"
   },
   {
-    id: 12,
-    nombre: "Zapatillas Adidas Harden",
+    id: 19,
+    nombre: "Pelota Premier League",
+    precio: 59.99,
+    categoria: "futbol",
+    imagen: "fotos/pelotapremier.jpg",
+    descrip: "Pelota oficial de la Premier League.",
+    fecha: "2024-06-08"
+  },
+
+  // BASKET
+  {
+    id: 20,
+    nombre: "Remera Boston Celtics",
+    precio: 59.99,
+    categoria: "basket",
+    imagen: "fotos/celtics.jpg",
+    descrip: "Remera oficial Boston Celtics.",
+    fecha: "2024-05-17"
+  },
+  {
+    id: 21,
+    nombre: "Remera LA Lakers",
+    precio: 59.99,
+    categoria: "basket",
+    imagen: "fotos/lakers.jpg",
+    descrip: "Remera oficial LA Lakers.",
+    fecha: "2024-06-26"
+  },
+  {
+    id: 22,
+    nombre: "Remera Timberwolves",
+    precio: 59.99,
+    categoria: "basket",
+    imagen: "fotos/wolves.jpg",
+    descrip: "Remera oficial Timberwolves.",
+    fecha: "2024-05-20"
+  },
+  {
+    id: 23,
+    nombre: "Remera Chicago Bulls",
+    precio: 59.99,
+    categoria: "basket",
+    imagen: "fotos/bulls.jpg",
+    descrip: "Remera oficial Chicago Bulls.",
+    fecha: "2024-06-01"
+  },
+  {
+    id: 24,
+    nombre: "Remera Brooklyn Nets",
+    precio: 59.99,
+    categoria: "basket",
+    imagen: "fotos/nets.jpg",
+    descrip: "Remera oficial Brooklyn Nets.",
+    fecha: "2024-05-13"
+  },
+  {
+    id: 25,
+    nombre: "Remera Indiana Pacers",
+    precio: 59.99,
+    categoria: "basket",
+    imagen: "fotos/pacers.jpg",
+    descrip: "Remera oficial Indiana Pacers.",
+    fecha: "2024-06-18"
+  },
+  {
+    id: 26,
+    nombre: "Remera Golden State Warriors",
+    precio: 59.99,
+    categoria: "basket",
+    imagen: "fotos/warr.jpg",
+    descrip: "Remera oficial Golden State Warriors.",
+    fecha: "2024-05-24"
+  },
+  {
+    id: 27,
+    nombre: "Zapatillas Nike Air Zoom BB",
+    precio: 139.99,
+    categoria: "basket",
+    imagen: "fotos/kineairzoom.jpg",
+    descrip: "Zapatillas de alto rendimiento para basket.",
+    fecha: "2024-06-12"
+  },
+  {
+    id: 28,
+    nombre: "Zapatillas Adidas Harden Vol.5",
     precio: 139.99,
     categoria: "basket",
     imagen: "fotos/adidashardem.jpg",
     descrip: "Zapatillas signature de James Harden.",
-    fecha: "2024-05-12"
-  },
-  {
-    id: 15,
-    nombre: "Canasto de Entrenamiento",
-    precio: 59.99,
-    categoria: "basket",
-    imagen: "fotos/canastoentrenamiento.jpg",
-    descrip: "Accesorio para práctica en casa.",
-    fecha: "2024-05-15"
-  },
-  {
-    id: 13,
-    nombre: "Camiseta Pacers",
-    precio: 24.99,
-    categoria: "futbol",
-    imagen: "fotos/future.webp",
-    descrip: "Protección y comodidad.",
-    fecha: "2024-05-10"
-  },
-  // RUNNING
-  {
-    id: 16,
-    nombre: "Zapatillas Asics Gel-Kayano",
-    precio: 119.99,
-    categoria: "running",
-    imagen: "fotos/gelkayano.jpg",
-    descrip: "Estabilidad y amortiguación.",
     fecha: "2024-05-16"
   },
   {
-    id: 17,
-    nombre: "Zapatillas New Balance 1080",
-    precio: 114.99,
-    categoria: "running",
-    imagen: "fotos/nb1080.jpg",
-    descrip: "Comodidad para largas distancias.",
-    fecha: "2024-05-17"
-  },
-  {
-    id: 18,
-    nombre: "Reloj Garmin Forerunner",
-    precio: 199.99,
-    categoria: "running",
-    imagen: "fotos/garminforerunner.jpg",
-    descrip: "GPS y métricas de carrera.",
-    fecha: "2024-05-18"
-  },
-  {
-    id: 19,
-    nombre: "Cinturón de Hidratación",
-    precio: 29.99,
-    categoria: "running",
-    imagen: "fotos/cinturondehidratacion.jpg",
-    descrip: "Mantente hidratado en ruta.",
-    fecha: "2024-05-19"
-  },
-  {
-    id: 20,
-    nombre: "Auriculares Bluetooth",
-    precio: 49.99,
-    categoria: "running",
-    imagen: "fotos/auricularesbt.jpg",
-    descrip: "Música sin cables.",
-    fecha: "2024-05-20"
-  },
-  // OTROS
-  {
-    id: 21,
-    nombre: "Mochila Deportiva",
-    precio: 69.99,
-    categoria: "running",
-    imagen: "fotos/mochila.jpg",
-    descrip: "Espacio y confort.",
-    fecha: "2024-05-21"
-  },
-  {
-    id: 22,
-    nombre: "Gorra Visera",
-    precio: 19.99,
-    categoria: "running",
-    imagen: "fotos/gorra.jpg",  
-    descrip: "Protección solar.",
-    fecha: "2024-05-22"
-  },
-  {
-    id: 23,
-    nombre: "Camiseta Técnica",
-    precio: 24.99,
-    categoria: "running",
-    imagen: "fotos/camiseta.jpg",
-    descrip: "Transpirable y ligera.",
-    fecha: "2024-05-23"
-  },
-  {
-    id: 24,
-    nombre: "Medias Compresión",
-    precio: 14.99,
-    categoria: "running",
-    imagen: "fotos/medias.jpg",
-    descrip: "Soporte muscular.",
-    fecha: "2024-05-24"
-  },
-  {
-    id: 25,
-    nombre: "Guantes de Entrenamiento",
-    precio: 24.99,
-    categoria: "running",
-    imagen: "fotos/guantesentrenamiento.jpg",
-    descrip: "Agarre y protección.",
-    fecha: "2024-05-25"
-  },
-  {
-    id: 26,
-    nombre: "Cinta para Estiramiento",
-    precio: 12.99,
-    categoria: "running",
-    imagen: "fotos/cintaestiramiento.jpg",
-    descrip: "Ayuda a la flexibilidad.",
-    fecha: "2024-05-26"
-  },
-  {
-    id: 27,
-    nombre: "Rodilleras elásticas",
-    precio: 34.99,
-    categoria: "running",
-    imagen: "fotos/rodilleras.jpg",
-    descrip: "Soporte para articulaciones.",
-    fecha: "2024-05-27"
-  },
-  {
-    id: 28,
-    nombre: "Zapatillas Salomon Speedcross",
-    precio: 139.99,
-    categoria: "running",
-    imagen: "fotos/speedcross.jpg",
-    descrip: "Trail running extremo.",
-    fecha: "2024-05-28"
-  },
-  {
     id: 29,
-    nombre: "Pulsera de Actividad",
-    precio: 59.99,
-    categoria: "running",
-    imagen: "fotos/pulseraactividad.jpg",
-    descrip: "Monitor de pasos y calorías.",
-    fecha: "2024-05-29"
-  },
-  {
-    id: 30,
-    nombre: "Suero Rehidratante",
-    precio: 9.99,
-    categoria: "running",
-    imagen: "fotos/suero.jpg",
-    descrip: "Reponer electrolitos.",
-    fecha: "2024-05-30"
-  },
-  {
-    id: 31,
-    nombre: "Cinta Kinesio",
-    precio: 19.99,
-    categoria: "running",
-    imagen: "fotos/kinesio.jpg",
-    descrip: "Prevención de lesiones.",
-    fecha: "2024-05-31"
-  },
-  {
-    id: 32,
-    nombre: "Rodilleras de Velcro",
-    precio: 29.99,
-    categoria: "running",
-    imagen: "fotos/rodillerasvelcro.jpg",
-    descrip: "Ajuste al cuerpo.",
-    fecha: "2024-06-01"
-  },
-  {
-    id: 33,
-    nombre: "Calcetines Antideslizantes",
-    precio: 12.99,
-    categoria: "running",
-    imagen: "fotos/calcetines.jpg",
-    descrip: "Seguridad en la pista.",
-    fecha: "2024-06-02"
-  },
-  {
-    id: 34,
-    nombre: "Bandas Elásticas",
-    precio: 14.99,
-    categoria: "running",
-    imagen: "fotos/bandas.jpg",
-    descrip: "Resistencia variable.",
-    fecha: "2024-06-03"
-  },
-  {
-    id: 35,
-    nombre: "Zapatillas Puma Clyde",
-    precio: 119.99,
-    categoria: "basket",
-    imagen: "fotos/pumaclyde.jpg",
-    descrip: "Classic retro style.",
-    fecha: "2024-06-04"
-  },
-  {
-    id: 36,
     nombre: "Pelota Spalding NBA",
     precio: 49.99,
     categoria: "basket",
     imagen: "fotos/pelotabasket.jpg",
     descrip: "Pelota oficial de la NBA.",
     fecha: "2024-06-05"
+  },
+
+  // RUNNING
+  {
+    id: 30,
+    nombre: "Zapatillas Adidas Ultraboost",
+    precio: 179.99,
+    categoria: "running",
+    imagen: "fotos/ultraboost.jpg",
+    descrip: "Amortiguación y retorno de energía.",
+    fecha: "2024-05-07"
+  },
+  {
+    id: 31,
+    nombre: "Zapatillas Adidas Adizero",
+    precio: 159.99,
+    categoria: "running",
+    imagen: "fotos/adizero.jpg",
+    descrip: "Ligereza para máxima velocidad.",
+    fecha: "2024-06-20"
+  },
+  {
+    id: 32,
+    nombre: "Zapatillas Nike Pegasus",
+    precio: 169.99,
+    categoria: "running",
+    imagen: "fotos/pegasus.jpg",
+    descrip: "Versatilidad y comodidad.",
+    fecha: "2024-05-30"
+  },
+  {
+    id: 33,
+    nombre: "Zapatillas Nike ZoomX",
+    precio: 189.99,
+    categoria: "running",
+    imagen: "fotos/zoomx.jpg",
+    descrip: "Máxima respuesta y ligereza.",
+    fecha: "2024-06-09"
+  },
+  {
+    id: 34,
+    nombre: "Zapatillas Asics Gel-Kayano",
+    precio: 159.99,
+    categoria: "running",
+    imagen: "fotos/asicsgel.webp",
+    descrip: "Soporte y estabilidad premium.",
+    fecha: "2024-05-23"
+  },
+  {
+    id: 35,
+    nombre: "Zapatillas Reebok Floatride",
+    precio: 139.99,
+    categoria: "running",
+    imagen: "fotos/reebok.webp",
+    descrip: "Ligereza y amortiguación.",
+    fecha: "2024-06-03"
+  },
+  {
+    id: 36,
+    nombre: "Zapatillas Puma Velocity Nitro",
+    precio: 129.99,
+    categoria: "running",
+    imagen: "fotos/pumazapas.jpg",
+    descrip: "Comodidad y velocidad.",
+    fecha: "2024-05-29"
+  },
+  {
+    id: 37,
+    nombre: "Zapatillas New Balance Fresh Foam",
+    precio: 149.99,
+    categoria: "running",
+    imagen: "fotos/new.jpeg",
+    descrip: "Amortiguación suave y soporte.",
+    fecha: "2024-06-07"
+  },
+  {
+    id: 38,
+    nombre: "Zapatillas New Balance 574",
+    precio: 119.99,
+    categoria: "running",
+    imagen: "fotos/zapasnewbalance.jpeg",
+    descrip: "Clásicas y cómodas para uso diario.",
+    fecha: "2024-05-12"
   }
 ];
 
 
-// UTILIDADES CART
-function getCart() {
+
+// funciones carrito
+
+// me da el objeto con el estado del carrito
+function getCart() { 
   return JSON.parse(localStorage.getItem('cart') || '{}');
 }
+
+// guardo en el navegador la info del carrito
 function saveCart(cart) {
-  localStorage.setItem('cart', JSON.stringify(cart));
+  localStorage.cart = JSON.stringify(cart);
 }
+
+// mantiene acutalizado al carrito
 function updateCartCount() {
-  const cart = getCart();
-  const totalItems = Object.values(cart).reduce((sum, q) => sum + q, 0);
-  document.getElementById('cartCount').textContent = totalItems;
+  let cart = getCart();
+  let totalItems = 0;
+  let productId;
+  for (productId in cart) { //recorre cada producto para sumar sus cantidades y mostrarlas
+    totalItems = totalItems + cart[productId];
+  }
+
+  let contador = document.getElementById('cartCount');
+  contador.textContent = totalItems;
 }
 
-// AÑADIR Y QUITAR
-
-function addToCart(id) {
+//agregar al carrito y actualizar contador total
+function addToCart(id) { //uso el ida para identificar el producto correcto
   const cart = getCart();
   const sidebar = document.getElementById('sidebarCart');
-  cart[id] = (cart[id] || 0) + 1;
+  cart[id] = (cart[id] || 0) + 1; 
   saveCart(cart);
   updateCartCount();
   renderCartItems();
   updateCartTotal();
-  sidebar.classList.add('open');
+  sidebar.classList.add('open'); //que se vea el carrito al agregar
 }
-
-function removeFromCart(id) {
+//eliminar del carrito y acutalizar contador total
+function removeFromCart(id) { //uso el ida para identificar el producto correcto
   const cart = getCart();
   if (!cart[id]) return;
   cart[id]--;
-  if (cart[id] === 0) delete cart[id];
+  if (cart[id] === 0) delete cart[id]; //elimina el producto del carrito
   saveCart(cart);
   updateCartCount();
   renderCartItems();
   updateCartTotal();
 }
 
-// RENDER CARRITO
+
+//carrito
 function renderCartItems() {
   const container = document.getElementById('cartItems');
-  container.innerHTML = '';
+  container.innerHTML = ''; //limpia el carrito
   const cart = getCart();
-  for (let id in cart) {
+  for (let id in cart) { //crea un html para cada producto depende de su cantidad y precio
     const prod = products.find(p => p.id == id);
     const qty = cart[id];
     const div = document.createElement('div');
@@ -385,12 +418,16 @@ function renderCartItems() {
     `;
     container.appendChild(div);
   }
-  container.querySelectorAll('.remove-btn').forEach(btn => {
-    btn.addEventListener('click', () => removeFromCart(btn.dataset.id));
-  });
-
-  // ← Aquí se actualiza el total
-  updateCartTotal();
+  let botones = container.querySelectorAll('.remove-btn');
+  for (let i = 0; i < botones.length; i++) { //bucle para obtener la data-id y agregarle un boton de eliminar
+    (function(btn) {
+      let id = btn.getAttribute('data-id');
+      btn.addEventListener('click', function() { //para eliminar si quiere
+        removeFromCart(id);
+      });
+    })(botones[i]);
+  }
+  updateCartTotal(); //actualizo total
 }
 
 // SIDEBAR TOGGLE
