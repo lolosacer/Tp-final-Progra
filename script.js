@@ -1,15 +1,5 @@
-// Datos de productos (array de objetos visto en clase)
-const products = [
+const productos = [
   // TENIS
-  {
-    id: 1,
-    nombre: "Raqueta Wilson Pro Staff",
-    precio: 199.99,
-    categoria: "tenis",
-    imagen: "fotos/raquetawilson.jpg",
-    descrip: "Raqueta profesional de alto rendimiento.",
-    fecha: "2024-05-14"
-  },
   {
     id: 2,
     nombre: "Raqueta Babolat Pure Drive",
@@ -18,15 +8,6 @@ const products = [
     imagen: "fotos/raquetababolat.webp",
     descrip: "Potencia y control para jugadores avanzados.",
     fecha: "2024-06-23"
-  },
-  {
-    id: 3,
-    nombre: "Raqueta Head Radical",
-    precio: 159.99,
-    categoria: "tenis",
-    imagen: "fotos/raquetahead.jpg",
-    descrip: "Ligera y versátil para todo tipo de juego.",
-    fecha: "2024-05-09"
   },
   {
     id: 4,
@@ -235,7 +216,7 @@ const products = [
     nombre: "Remera Golden State Warriors",
     precio: 59.99,
     categoria: "basket",
-    imagen: "fotos/warr.jpg",
+    imagen: "fotos/warr.webp",
     descrip: "Remera oficial Golden State Warriors.",
     fecha: "2024-05-24"
   },
@@ -244,7 +225,7 @@ const products = [
     nombre: "Zapatillas Nike Air Zoom BB",
     precio: 139.99,
     categoria: "basket",
-    imagen: "fotos/kineairzoom.jpg",
+    imagen: "fotos/nikeairzoom.jpg",
     descrip: "Zapatillas de alto rendimiento para basket.",
     fecha: "2024-06-12"
   },
@@ -330,195 +311,192 @@ const products = [
     imagen: "fotos/pumazapas.jpg",
     descrip: "Comodidad y velocidad.",
     fecha: "2024-05-29"
-  },
-  {
-    id: 37,
-    nombre: "Zapatillas New Balance Fresh Foam",
-    precio: 149.99,
-    categoria: "running",
-    imagen: "fotos/new.jpeg",
-    descrip: "Amortiguación suave y soporte.",
-    fecha: "2024-06-07"
-  },
-  {
-    id: 38,
-    nombre: "Zapatillas New Balance 574",
-    precio: 119.99,
-    categoria: "running",
-    imagen: "fotos/zapasnewbalance.jpeg",
-    descrip: "Clásicas y cómodas para uso diario.",
-    fecha: "2024-05-12"
   }
 ];
-
 
 
 // funciones carrito
 
 // me da el objeto con el estado del carrito
-function getCart() { 
+function obtenerCarrito() {
   return JSON.parse(localStorage.getItem('cart') || '{}');
 }
 
 // guardo en el navegador la info del carrito
-function saveCart(cart) {
-  localStorage.cart = JSON.stringify(cart);
+function guardarCarrito(carrito) {
+  localStorage.cart = JSON.stringify(carrito);
 }
 
-// mantiene acutalizado al carrito
-function updateCartCount() {
-  let cart = getCart();
-  let totalItems = 0;
-  let productId;
-  for (productId in cart) { //recorre cada producto para sumar sus cantidades y mostrarlas
-    totalItems = totalItems + cart[productId];
+// mantiene actualizado el contador del carrito
+function actContCarrito() {
+  const carrito = obtenerCarrito();
+  let totalArt = 0;
+  for (let clave in carrito) {
+    totalArt += carrito[clave];
   }
-
-  let contador = document.getElementById('cartCount');
-  contador.textContent = totalItems;
+  const cont = document.getElementById('cartCount');
+  cont.textContent = totalArt;
 }
 
-//agregar al carrito y actualizar contador total
-function addToCart(id) { //uso el ida para identificar el producto correcto
-  const cart = getCart();
-  const sidebar = document.getElementById('sidebarCart');
-  cart[id] = (cart[id] || 0) + 1; 
-  saveCart(cart);
-  updateCartCount();
-  renderCartItems();
-  updateCartTotal();
-  sidebar.classList.add('open'); //que se vea el carrito al agregar
-}
-//eliminar del carrito y acutalizar contador total
-function removeFromCart(id) { //uso el ida para identificar el producto correcto
-  const cart = getCart();
-  if (!cart[id]) return;
-  cart[id]--;
-  if (cart[id] === 0) delete cart[id]; //elimina el producto del carrito
-  saveCart(cart);
-  updateCartCount();
-  renderCartItems();
-  updateCartTotal();
+// agregar al carrito y actualizar contador total
+function agregarAlCarrito(id) {
+  const carrito = obtenerCarrito();
+  carrito[id] = (carrito[id] || 0) + 1;
+  guardarCarrito(carrito);
+  actContCarrito();
+  mostrarProdsCarrito();
+  actualizarTotalCarrito();
+  document.getElementById('sidebarCart').classList.add('open');
 }
 
+// eliminar del carrito y actualizar contador total
+function quitarDelCarrito(id) {
+  const carrito = obtenerCarrito();
+  if (!carrito[id]) return;
+  carrito[id]--;
+  if (carrito[id] === 0) delete carrito[id];
+  guardarCarrito(carrito);
+  actContCarrito();
+  mostrarProdsCarrito();
+  actualizarTotalCarrito();
+}
 
-//carrito
-function renderCartItems() {
+// mostrar productos en el carrito
+function mostrarProdsCarrito() {
   const container = document.getElementById('cartItems');
-  container.innerHTML = ''; //limpia el carrito
-  const cart = getCart();
-  for (let id in cart) { //crea un html para cada producto depende de su cantidad y precio
-    const prod = products.find(p => p.id == id);
-    const qty = cart[id];
+  container.innerHTML = '';
+  const carrito = obtenerCarrito();
+  for (let clave in carrito) {
+    const producto = productos.find(function(p) {
+      return p.id == clave;
+    });
+    const cantidad = carrito[clave];
     const div = document.createElement('div');
     div.innerHTML = `
-      <span>${prod.nombre} (x${qty})</span>
-      <span>$${(prod.precio * qty).toFixed(2)}</span>
-      <button data-id="${id}" class="remove-btn">✕</button>
+      <span>${producto.nombre} (x${cantidad})</span>
+      <span>$${(producto.precio * cantidad).toFixed(2)}</span>
+      <button data-id="${clave}" class="remove-btn">✕</button>
     `;
     container.appendChild(div);
   }
-  let botones = container.querySelectorAll('.remove-btn');
-  for (let i = 0; i < botones.length; i++) { //bucle para obtener la data-id y agregarle un boton de eliminar
-    (function(btn) {
-      let id = btn.getAttribute('data-id');
-      btn.addEventListener('click', function() { //para eliminar si quiere
-        removeFromCart(id);
+  const botones = container.querySelectorAll('.remove-btn');
+  for (let i = 0; i < botones.length; i++) {
+    (function(boton){
+      const clave = boton.getAttribute('data-id');
+      boton.addEventListener('click', function(){
+        quitarDelCarrito(clave);
       });
     })(botones[i]);
   }
-  updateCartTotal(); //actualizo total
+  actualizarTotalCarrito();
 }
 
-// SIDEBAR TOGGLE
-const cartButton = document.getElementById('cartButton');
-const sidebar = document.getElementById('sidebarCart');
-const closeBtn = document.getElementById('closeCart');
-cartButton.addEventListener('click', () => sidebar.classList.add('open'));
-closeBtn.addEventListener('click', () => sidebar.classList.remove('open'));
+// abre / cierra la barra lateral del carrito
+const botonCarrito  = document.getElementById('cartButton');
+const barraCarrito  = document.getElementById('sidebarCart');
+const botonCerrar   = document.getElementById('closeCart');
 
-// COMPRAR
-document.getElementById('buyButton').addEventListener('click', () => {
+botonCarrito.addEventListener('click', function(){
+  barraCarrito.classList.add('open');
+});
+
+botonCerrar.addEventListener('click', function(){
+  barraCarrito.classList.remove('open');
+});
+
+// botón de compra
+const botonCompra = document.getElementById('buyButton');
+botonCompra.addEventListener('click', function(){
   alert('¡Gracias por comprar en Futix!');
   localStorage.removeItem('cart');
-  updateCartCount();
-  renderCartItems();
-  updateCartTotal();
+  actContCarrito();
+  mostrarProdsCarrito();
+  actualizarTotalCarrito();
 });
 
-// CARGAR PRODUCTOS EN PÁGINAS
-document.addEventListener('DOMContentLoaded', () => {
-  updateCartCount();
-  renderCartItems();
-  updateCartTotal();
-
-  // Si estamos en productos.html
-  document.querySelectorAll('.productos-lista').forEach(list => {
-    const sectionId = list.closest('section').id;
-    const filtered = products.filter(p => p.categoria === sectionId);
-    filtered.forEach(p => {
+// cargar productos por categoría
+function cargarProdPorCat() {
+  const listas = document.querySelectorAll('.productos-lista');
+  listas.forEach(function(lista){
+    const cat      = lista.closest('section').id;
+    const filtrados = productos.filter(function(p){
+      return p.categoria === cat;
+    });
+    filtrados.forEach(function(p){
       const div = document.createElement('div');
       div.className = 'producto';
-      div.innerHTML = `
-        <img src="${p.imagen}" alt="${p.nombre}">
-        <h3>${p.nombre}</h3>
-        <p>${p.descrip}</p>
-        <p>$${p.precio.toFixed(2)}</p>
-        <button class="btn-agregar" data-id="${p.id}">Agregar al carrito</button>
-      `;
-      list.appendChild(div);
+      div.innerHTML =
+        '<img src="' + p.imagen + '" alt="' + p.nombre + '">' +
+        '<h3>' + p.nombre + '</h3>' +
+        '<p>' + p.descrip + '</p>' +
+        '<p>$' + p.precio.toFixed(2) + '</p>' +
+        '<button class="btn-agregar" data-id="' + p.id + '">Agregar al carrito</button>';
+      lista.appendChild(div);
     });
   });
-  // handlers productos
-  document.querySelectorAll('.btn-agregar').forEach(btn => {
-    btn.addEventListener('click', () => addToCart(btn.dataset.id));
-  });
-
-  // Si estamos en index.html: generar carousel aleatorio
-  const recContainer = document.getElementById('recientes-inner');
-  if (recContainer) {
-    // mezcla aleatoria
-    const shuffled = products
-      .map(p => ({ p, sort: Math.random() }))
-      .sort((a,b) => a.sort - b.sort)
-      .map(o => o.p)
-      .slice(0, 10); // primeros 10
-    const perSlide = 4;
-    for (let i = 0; i < shuffled.length; i += perSlide) {
-      const item = document.createElement('div');
-      item.className = 'carousel-item' + (i === 0 ? ' active' : '');
-      let inner = '<div class="d-flex justify-content-center gap-4">';
-      shuffled.slice(i, i+perSlide).forEach(p => {
-        inner += `
-          <div class="producto" style="width: 18rem;">
-            <img src="${p.imagen}" alt="${p.nombre}" class="w-100" style="height: 180px; object-fit: contain;">
-            <h3 style="font-size:1.1rem;">${p.nombre}</h3>
-            <p>${p.descrip}</p>
-            <p>$${p.precio.toFixed(2)}</p>
-            <button class="btn-agregar" data-id="${p.id}">Agregar al carrito</button>
-          </div>
-        `;
-      });
-      inner += '</div>';
-      item.innerHTML = inner;
-      recContainer.appendChild(item);
-    }
-    // reusar handlers en carousel recientes
-    recContainer.querySelectorAll('.btn-agregar').forEach(btn => {
-      btn.addEventListener('click', () => addToCart(btn.dataset.id));
+  const btns = document.querySelectorAll('.btn-agregar');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      agregarAlCarrito(b.getAttribute('data-id'));
     });
-  }
-});
-
-function updateCartTotal() {
-  const cart = getCart();
-  let sum = 0;
-  for (let id in cart) {
-    const prod = products.find(p => p.id == id);
-    if (prod) sum += prod.precio * cart[id];
-  }
-  // Asegura que muestre $0.00 si está vacío
-  document.getElementById('cartTotal').textContent = 'Total: $' + sum.toFixed(2);
+  });
 }
 
+// carrusel de últimos productos por fecha
+function generarCarruselUltimos() {
+  const container = document.getElementById('recientes-inner');
+  if (!container) return;
+  const ultimos = productos.slice()
+    .sort(function(a, b){
+      return new Date(b.fecha) - new Date(a.fecha);
+    })
+    .slice(0, 10);
 
+  const porSlide = 4;
+  for (let i = 0; i < ultimos.length; i += porSlide) {
+    const prodGroup = document.createElement('div');
+    prodGroup.className = 'carousel-item' + (i === 0 ? ' active' : '');
+    let inner = '<div class="d-flex justify-content-center gap-4">';
+    ultimos.slice(i, i + porSlide).forEach(function(p){
+      inner +=
+        '<div class="producto" style="width:18rem;">' +
+          '<img src="' + p.imagen + '" alt="' + p.nombre + '" class="w-100" style="height:180px;object-fit:contain;">' +
+          '<h3 style="font-size:1.1rem;">' + p.nombre + '</h3>' +
+          '<p>' + p.descrip + '</p>' +
+          '<p>$' + p.precio.toFixed(2) + '</p>' +
+          '<button class="btn-agregar" data-id="' + p.id + '">Agregar al carrito</button>' +
+        '</div>';
+    });
+    inner += '</div>';
+    prodGroup.innerHTML = inner;
+    container.appendChild(prodGroup);
+  }
+  const btns2 = container.querySelectorAll('.btn-agregar');
+  btns2.forEach(function(b){
+    b.addEventListener('click', function(){
+      agregarAlCarrito(b.getAttribute('data-id'));
+    });
+  });
+}
+
+// actualizar total del carrito
+function actualizarTotalCarrito() {
+  const carrito = obtenerCarrito();
+  let suma = 0;
+  for (let clave in carrito) {
+    const producto = productos.find(function(p){
+      return p.id == clave;
+    });
+    if (producto) suma += producto.precio * carrito[clave];
+  }
+  document.getElementById('cartTotal').textContent = 'Total: $' + suma.toFixed(2);
+}
+
+// inicializar al cargar la página
+document.addEventListener('DOMContentLoaded', function(){
+  actContCarrito();
+  mostrarProdsCarrito();
+  actualizarTotalCarrito();
+  cargarProdPorCat();
+  generarCarruselUltimos();
+});
