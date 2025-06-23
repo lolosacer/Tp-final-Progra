@@ -315,71 +315,27 @@ const productos = [
 ];
 
 
-// funciones carrito
+//funciones 
 
-// me da el objeto con el estado del carrito
-function obtenerCarrito() {
-  return JSON.parse(localStorage.getItem('cart') || '{}');
-}
-
-// guardo en el navegador la info del carrito
-function guardarCarrito(carrito) {
-  localStorage.cart = JSON.stringify(carrito);
-}
-
-// mantiene actualizado el contador del carrito
-function actContCarrito() {
-  const carrito = obtenerCarrito();
-  let totalArt = 0;
-  for (let clave in carrito) {
-    totalArt += carrito[clave];
-  }
-  const cont = document.getElementById('cartCount');
-  cont.textContent = totalArt;
-}
-
-// agregar al carrito y actualizar contador total
-function agregarAlCarrito(id) {
-  const carrito = obtenerCarrito();
-  carrito[id] = (carrito[id] || 0) + 1;
-  guardarCarrito(carrito);
-  actContCarrito();
-  mostrarProdsCarrito();
-  actualizarTotalCarrito();
-  document.getElementById('sidebarCart').classList.add('open');
-}
-
-// eliminar del carrito y actualizar contador total
-function quitarDelCarrito(id) {
-  const carrito = obtenerCarrito();
-  if (!carrito[id]) return;
-  carrito[id]--;
-  if (carrito[id] === 0) delete carrito[id];
-  guardarCarrito(carrito);
-  actContCarrito();
-  mostrarProdsCarrito();
-  actualizarTotalCarrito();
-}
-
-// mostrar productos en el carrito
+//mostrar productos en el carrito
 function mostrarProdsCarrito() {
-  const container = document.getElementById('cartItems');
-  container.innerHTML = '';
-  const carrito = obtenerCarrito();
-  for (let clave in carrito) {
-    const producto = productos.find(function(p) {
+  const container = document.getElementById('cartItems'); //traigo los items que estan en el carrito
+  container.innerHTML = ''; //para asegurarme que no se agregue lo que habia antes
+  const carrito = obtenerCarrito(); 
+  for (let clave in carrito) { //recorre cada producto
+    const producto = productos.find(function(p) { //busca el objeto completo en productos para tener nombre y precio
       return p.id == clave;
     });
     const cantidad = carrito[clave];
-    const div = document.createElement('div');
+    const div = document.createElement('div'); //lo creo en html, nombre/precioxcantidad/boton para eliminar
     div.innerHTML = `
       <span>${producto.nombre} (x${cantidad})</span>
       <span>$${(producto.precio * cantidad).toFixed(2)}</span>
-      <button data-id="${clave}" class="remove-btn">✕</button>
+      <button data-id="${clave}" class="removeBtn">✕</button>
     `;
-    container.appendChild(div);
+    container.appendChild(div); //lo agrego
   }
-  const botones = container.querySelectorAll('.remove-btn');
+  const botones = container.querySelectorAll('.removeBtn'); //le doy la funcionalidad al boton de sacar del carrito
   for (let i = 0; i < botones.length; i++) {
     (function(boton){
       const clave = boton.getAttribute('data-id');
@@ -391,112 +347,158 @@ function mostrarProdsCarrito() {
   actualizarTotalCarrito();
 }
 
-// abre / cierra la barra lateral del carrito
+//guardo en el navegador la info del carrito
+function guardarCarrito(carrito) {
+  localStorage.cart = JSON.stringify(carrito); //local storage solo acepta cadena de caracteres, por eso lo convierto
+}
+
+//me da el objeto con el estado del carrito
+function obtenerCarrito() {
+  return JSON.parse(localStorage.getItem('cart') || '{}'); //recupero el texto que habia guardado y lo vuelvo a convertir en un objeto
+}
+
+//mantiene actualizado el contador del carrito
+function actContCarrito() {
+  const carrito = obtenerCarrito(); //lee el localstorage
+  let articulos = 0;
+  for (let clave in carrito) { //acumula el total del carrito
+    articulos += carrito[clave];
+  }
+  const cont = document.getElementById('cartCount');
+  cont.textContent = articulos; //actualiza el contador
+}
+
+//agregar al carrito y actualizar contador total
+function agregarAlCarrito(id) {
+  const carrito = obtenerCarrito(); //estado actual del carrito
+  carrito[id] = (carrito[id] || 0) + 1; //agrego una unidad
+  guardarCarrito(carrito);
+  actContCarrito();
+  mostrarProdsCarrito();
+  actualizarTotalCarrito();
+  document.getElementById('sidebarCart').classList.add('open'); //abro del sidebar
+}
+
+//eliminar del carrito y actualizar contador total
+function quitarDelCarrito(id) {
+  const carrito = obtenerCarrito();
+  if (!carrito[id]) return; //salir si no existe
+  carrito[id]--; //resta una unidad al carrito
+  if (carrito[id] === 0) delete carrito[id]; // si ya no quedan de ese producto en el carrito lo elimina
+  guardarCarrito(carrito);
+  actContCarrito();
+  mostrarProdsCarrito();
+  actualizarTotalCarrito();
+}
+
+//abre y cierra la barra lateral del carrito
 const botonCarrito  = document.getElementById('cartButton');
 const barraCarrito  = document.getElementById('sidebarCart');
 const botonCerrar   = document.getElementById('closeCart');
 
+//abrir sidebar
 botonCarrito.addEventListener('click', function(){
   barraCarrito.classList.add('open');
 });
 
+//cerrar sidebar
 botonCerrar.addEventListener('click', function(){
   barraCarrito.classList.remove('open');
 });
 
-// botón de compra
-const botonCompra = document.getElementById('buyButton');
-botonCompra.addEventListener('click', function(){
+//botón de compra
+const botonCompra = document.getElementById('buyButton'); //traigo el boton de compra
+botonCompra.addEventListener('click',function(){
   alert('¡Gracias por comprar en Futix!');
-  localStorage.removeItem('cart');
+  localStorage.removeItem('cart'); //borro el carrito del localstorage
   actContCarrito();
-  mostrarProdsCarrito();
-  actualizarTotalCarrito();
+  mostrarProdsCarrito(); 
+  actualizarTotalCarrito(); 
 });
 
-// cargar productos por categoría
-function cargarProdPorCat() {
-  const listas = document.querySelectorAll('.productos-lista');
-  listas.forEach(function(lista){
-    const cat      = lista.closest('section').id;
-    const filtrados = productos.filter(function(p){
+//cargar productos por categoría
+function cargarProdPorCat(){
+  const listas = document.querySelectorAll('.productos-lista'); //traigo todas las listas de productos
+  listas.forEach(function(lista){ //por cada lista
+    const cat = lista.closest('section').id; //agarro la categoria del id de la seccion
+    const filtrados = productos.filter(function(p){ //filtro productos de esa categoria
       return p.categoria === cat;
     });
-    filtrados.forEach(function(p){
-      const div = document.createElement('div');
-      div.className = 'producto';
+    filtrados.forEach(function(p){ //por cada producto filtrado
+      const div = document.createElement('div'); //creo el div del producto
+      div.className = 'producto'; //le pongo la clase producto
       div.innerHTML =
-        '<img src="' + p.imagen + '" alt="' + p.nombre + '">' +
-        '<h3>' + p.nombre + '</h3>' +
-        '<p>' + p.descrip + '</p>' +
-        '<p>$' + p.precio.toFixed(2) + '</p>' +
-        '<button class="btn-agregar" data-id="' + p.id + '">Agregar al carrito</button>';
-      lista.appendChild(div);
+        '<img src="'+p.imagen+'" alt="'+p.nombre+'">'+ //imagen del producto
+        '<h3>'+p.nombre+'</h3>'+ //nombre
+        '<p>'+p.descrip+'</p>'+ //descripcion
+        '<p>$'+p.precio.toFixed(2)+'</p>'+ //precio
+        '<button class="btn-agregar" data-id="'+p.id+'">Agregar al carrito</button>'; //boton pa agregar
+      lista.appendChild(div); //lo agrego a la lista
     });
   });
-  const btns = document.querySelectorAll('.btn-agregar');
-  btns.forEach(function(b){
-    b.addEventListener('click', function(){
-      agregarAlCarrito(b.getAttribute('data-id'));
+  const btns = document.querySelectorAll('.btn-agregar'); //traigo botones de agregar
+  btns.forEach(function(b){ //por cada boton
+    b.addEventListener('click',function(){ //le asigno el click para agregar
+      agregarAlCarrito(b.getAttribute('data-id')); //agarro id del data y agrego
     });
   });
 }
 
-// carrusel de últimos productos por fecha
-function generarCarruselUltimos() {
-  const container = document.getElementById('recientes-inner');
-  if (!container) return;
-  const ultimos = productos.slice()
-    .sort(function(a, b){
+//carousel de últimos productos por fecha en el inicio
+function generarCarruselUltimos(){
+  const container = document.getElementById('recientes-inner'); //traigo contenedor del carousel
+  if(!container) return; //si no existe salgo
+  const ultimos = productos.slice() //clono array
+    .sort(function(a,b){ //ordeno de mas nuevo a mas viejo
       return new Date(b.fecha) - new Date(a.fecha);
     })
-    .slice(0, 10);
+    .slice(0,10); //me quedo con los 10 mas nuevos
 
-  const porSlide = 4;
-  for (let i = 0; i < ultimos.length; i += porSlide) {
-    const prodGroup = document.createElement('div');
-    prodGroup.className = 'carousel-item' + (i === 0 ? ' active' : '');
-    let inner = '<div class="d-flex justify-content-center gap-4">';
-    ultimos.slice(i, i + porSlide).forEach(function(p){
+  const porSlide = 4; //cantidad por slide
+  for(let i=0; i<ultimos.length; i+=porSlide){ //armo grupos de 4
+    const prodGroup = document.createElement('div'); //creo el div del slide
+    prodGroup.className = 'carousel-item'+(i===0?' active':''); //activo el primero
+    let inner = '<div class="d-flex justify-content-center gap-4">'; //inicio fila
+    ultimos.slice(i,i+porSlide).forEach(function(p){ //por cada producto del grupo
       inner +=
-        '<div class="producto" style="width:18rem;">' +
-          '<img src="' + p.imagen + '" alt="' + p.nombre + '" class="w-100" style="height:180px;object-fit:contain;">' +
-          '<h3 style="font-size:1.1rem;">' + p.nombre + '</h3>' +
-          '<p>' + p.descrip + '</p>' +
-          '<p>$' + p.precio.toFixed(2) + '</p>' +
-          '<button class="btn-agregar" data-id="' + p.id + '">Agregar al carrito</button>' +
+        '<div class="producto" style="width:18rem;">'+
+          '<img src="'+p.imagen+'" alt="'+p.nombre+'" class="w-100" style="height:180px;object-fit:contain;">'+ //imagen
+          '<h3 style="font-size:1.1rem;">'+p.nombre+'</h3>'+ //nombre
+          '<p>'+p.descrip+'</p>'+ //descripcion
+          '<p>$'+p.precio.toFixed(2)+'</p>'+ //precio
+          '<button class="btn-agregar" data-id="'+p.id+'">Agregar al carrito</button>'+ //boton para agregar
         '</div>';
     });
-    inner += '</div>';
-    prodGroup.innerHTML = inner;
-    container.appendChild(prodGroup);
+    inner += '</div>'; //cierro fila
+    prodGroup.innerHTML = inner; //seteo html del slide
+    container.appendChild(prodGroup); //lo agrego al carousel
   }
-  const btns2 = container.querySelectorAll('.btn-agregar');
-  btns2.forEach(function(b){
-    b.addEventListener('click', function(){
-      agregarAlCarrito(b.getAttribute('data-id'));
+  const btns2 = container.querySelectorAll('.btn-agregar'); //traigo botones del carousel
+  btns2.forEach(function(b){ //por cada boton
+    b.addEventListener('click',function(){ //le asigno click pa agregar
+      agregarAlCarrito(b.getAttribute('data-id')); //agarro id y agrego
     });
   });
 }
 
-// actualizar total del carrito
-function actualizarTotalCarrito() {
-  const carrito = obtenerCarrito();
+//actualizar total del carrito
+function actualizarTotalCarrito(){
+  const carrito = obtenerCarrito(); //traigo carrito del storage
   let suma = 0;
-  for (let clave in carrito) {
-    const producto = productos.find(function(p){
-      return p.id == clave;
+  for(let clave in carrito){ //por cada producto en el carrito
+    const producto = productos.find(function(p){ //busco datos del producto
+      return p.id==clave;
     });
-    if (producto) suma += producto.precio * carrito[clave];
+    if(producto) suma += producto.precio*carrito[clave]; //sumo precio por cantidad
   }
-  document.getElementById('cartTotal').textContent = 'Total: $' + suma.toFixed(2);
+  document.getElementById('cartTotal').textContent='Total: $'+suma.toFixed(2); //muestro el total
 }
 
-// inicializar al cargar la página
-document.addEventListener('DOMContentLoaded', function(){
-  actContCarrito();
-  mostrarProdsCarrito();
-  actualizarTotalCarrito();
-  cargarProdPorCat();
-  generarCarruselUltimos();
+//inicializar al cargar la página
+document.addEventListener('DOMContentLoaded',function(){ //cuando arranca la página
+  actContCarrito(); //actualizo contador
+  mostrarProdsCarrito(); //pinto productos en el carrito
+  actualizarTotalCarrito(); //actualizo total
+  cargarProdPorCat(); //cargo productos x categoría
+  generarCarruselUltimos(); //armo carousel de recientes
 });
