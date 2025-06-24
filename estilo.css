@@ -66,7 +66,7 @@ body {
   cursor:pointer;
 }
 
-/*caption del carousel  texto grande encima con sombra*/
+/*caption del carousel texto grande encima con sombra*/
 .carousel-caption.custom-caption {
   position:absolute;
   bottom:24px;
@@ -83,7 +83,26 @@ body {
   text-shadow:2px 2px 8px black;
 }
 
-/*seccion quienes somos con padd*/
+/*imagenes carousel index*/
+#carouselSections .carousel-item img {
+  width:100%;
+  height:500px;
+  object-fit:cover;
+  display:block;
+}
+
+/*titulo carousel index overlay legible*/
+#carouselSections .carousel-caption h5 {
+  font-size:1.5rem;
+  background:rgba(0,0,0,0.5);
+  padding:8px 16px;
+  margin:0;
+  display:inline-block;
+  border-radius:4px;
+  color:white;
+}
+
+/*seccion quienes somos*/
 .quienesSomos {
   padding:0 32px;
 }
@@ -181,7 +200,7 @@ body {
   border-radius:0;
 }
 
-/*iconos carousel invertidos para que se vean en el contraste, lo busque en google :)*/
+/*iconos carousel invertidos para que se vean en el contraste lo busqué en google :)*/
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter:invert(1);
@@ -194,7 +213,7 @@ body {
   text-align:right;
 }
 
-/*sidebar del carrito  lateral fijo*/
+/*sidebar del carrito lateral fijo*/
 #sidebarCart {
   position:fixed;
   top:0;
@@ -220,7 +239,7 @@ body {
 #sidebarCart h2 { /*titulo carrito arriba*/
   margin-bottom:16px;
 }
-#sidebarCart #cartItems div { /*item carrito: nombre+btn distribuidos*/
+#sidebarCart #cartItems div { /*item carrito nombre+btn distribuidos*/
   display:flex;
   justify-content:space-between;
   margin-bottom:12px;
@@ -235,7 +254,7 @@ body {
   margin-top:16px;
 }
 
-/*responsive para pantallas chicas queda bien*/
+/*responsive el celular*/
 @media(max-width:600px){
   header{ /*ajusto header para el celu*/
     flex-direction:row;
@@ -244,8 +263,8 @@ body {
     flex-wrap:wrap;
     padding:16px 8px;
   }
-  body{font-size:.95rem;} /*texto mas chico y se lea mejro/
-  .section-title{left:16px;} /*titulo mas pegado que ajusta laapantalla*/
+  body{font-size:.95rem;} /*texto mas chico y se lea mejor*/
+  .section-title{left:16px;} /*titulo mas pegado ajusta pantalla*/
   .headerContenido{ /*header mas apretado para que quede ordenado*/
     display:flex;
     flex-direction:row;
